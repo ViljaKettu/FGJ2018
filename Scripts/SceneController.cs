@@ -9,9 +9,10 @@ using UnityEngine.SceneManagement;
 public class SceneController : MonoBehaviour
 {
     public GameObject[] people;
-    public Vector3[] locs;
+    public Vector2[] locs;
     public string[] names;
     SoundManager sound;
+    RndMessages correctPerson;
 
     public GameObject convBox;
     public string activePerson;
@@ -21,7 +22,6 @@ public class SceneController : MonoBehaviour
     void Start ()
     {
         people = GameObject.FindGameObjectsWithTag("People");
-        convBox = GameObject.FindGameObjectWithTag("ConvBox");
 
         for (int i = 0; i < people.Length; i++)
         {
@@ -46,23 +46,26 @@ public class SceneController : MonoBehaviour
             }
         }
 
-        go.transform.position = new Vector3(-3.5f, -5f, 90f);
+        go.transform.position = new Vector2(-3.5f, -5f);
         go.transform.localScale = new Vector2(2, 2);
         txt.text = line;
     }
 
     public void CheckPerson()
     {
-        if(activePerson == names[0])
+
+        //if (activePerson == correctPerson.person)
+            if (activePerson == names[0])
         {
             txt.text = "CORRECT!!";
             sound.PlayCorrect();
-            StartCoroutine(Wait(3.0f));
+            StartCoroutine(Wait(2.0f));
         }
         else
         {
             txt.text = "ERROR!!";
             sound.PlayWrong();
+            StartCoroutine(GameOver(2.0f));
         }
     }
 
@@ -82,6 +85,12 @@ public class SceneController : MonoBehaviour
     IEnumerator Wait(float delay)
     {
         yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("SoundTEST");
+        SceneManager.LoadScene("winScreen");
+    }
+
+    IEnumerator GameOver(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene("GameOver");
     }
 }

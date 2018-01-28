@@ -5,14 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class LoadNewPackage : MonoBehaviour
 {
-    private void Awake()
-    {
-        StartCoroutine(Lose(3.0f));
-    }
+    public GameObject package = null;
+    DestroyOnLoad image;
 
-    IEnumerator Lose(float delay)
+    private void Start()
     {
-        yield return new WaitForSeconds(delay);
-        SceneManager.LoadScene("MenuScreen");
+        GameObject clone = (GameObject)Instantiate(package, transform.position, Quaternion.identity);
+        Destroy(clone, 3.0f);
     }
 }

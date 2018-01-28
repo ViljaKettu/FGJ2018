@@ -8,7 +8,7 @@ public class LoadScene : MonoBehaviour
 
     public void OnClickPlay()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadScene("NewPackage");
     }
 
     public void ReturnToMenu()

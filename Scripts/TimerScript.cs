@@ -6,10 +6,20 @@ using System.Collections;
 public class TimerScript : MonoBehaviour
 {
     static float timeLeft = 300.0f;
+    bool timerIsOn = false;
+
+    private void Awake()
+    {
+        StartCoroutine(Wait());
+    }
 
     void Update()
     {
-        timeLeft -= Time.deltaTime;
+        if(timerIsOn)
+        {
+            timeLeft -= Time.deltaTime;
+        }
+
     }
 
     void OnGUI()
@@ -25,5 +35,10 @@ public class TimerScript : MonoBehaviour
         timeLeft = 300.0f;
     }
 
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(3);
+        timerIsOn = true;
+    }
 }
 

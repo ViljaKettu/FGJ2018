@@ -7,12 +7,15 @@ using System.Linq;
 
 public class RndMessages : MonoBehaviour
 {
-    string[] texts = new string[] {"Kissa syö kalaa", "Koira syö lihaa", "Marsu syö kurkkua" };
-    string[] texts2 = new string[] { ", joka on siitä hyvää. ", ", joka on siitä pahaa. ", ", joka on siitä älyttömän hyvää. " };
-    string[] texts3 = new string[] { " Se tykkää silityksistä.", " Se ei tykkää silityksistä.", " Se rakastaa silityksiä." };
-    string[] seperators = { ",", ".", "!", "?", ";", ":", " " };
+    string[] texts = new string[] { "Prom king<b>and his queen; In the shadow of<b>a bonsai tree;<b>Arigatou gozaimasu ",
+        "Deliver me<b>to the garden<b>surrounded by angels; You might<b>get lucky, but nothing<b>is free; Take me<b>down where<b>the grass is green ",
+        "Nature calls, pants fall; They won't<b>let me<b>to the mall; Ask her, I have<b>barely drunk<b>at all ", "Don't you<b>know who<b>I am? Odds are<b>you do " };
+    string[] persons = new string[] {"pastori", "weeb", "puliukko", "puliakka", "poliisi", "guido", "seurapiirijulkkis", "perusmuija" };
+    string[] seperators = { ",", ".", "!", "?", ";", ":", "<b>" };
     string[] textSplit;
     List<string> words;
+
+    public string person;
 
     string message;
     string encryptedMessage;
@@ -25,12 +28,26 @@ public class RndMessages : MonoBehaviour
 
     private void Start()
     {
+        message = texts[UnityEngine.Random.Range(0, texts.Length)];
 
-        currentText = texts[UnityEngine.Random.Range(0, texts.Length)];
-        currentText2 = texts2[UnityEngine.Random.Range(0, texts.Length)];
-        currentText3 = texts3[UnityEngine.Random.Range(0, texts.Length)];
+        if(message == texts[0])
+        {
+            person = persons[1];
+        }
 
-        message = currentText + currentText2 + currentText3;
+        else if (message == texts[1])
+        {
+            person = persons[0];
+        }
+
+        else if (message == texts[2])
+        {
+            person = persons[2];
+        }
+        else if (message == texts[3])
+        {
+            person = persons[6];
+        }
 
         EncryptMessage();
 
@@ -40,7 +57,6 @@ public class RndMessages : MonoBehaviour
 
     void EncryptMessage()
     {
-
         textSplit = message.Split(seperators, StringSplitOptions.RemoveEmptyEntries);
         Debug.Log(message);
         words = textSplit.ToList();
